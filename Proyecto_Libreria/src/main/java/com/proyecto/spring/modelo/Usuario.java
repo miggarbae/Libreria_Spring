@@ -31,6 +31,7 @@ public class Usuario {
         this.rol = rol;
     }
 
+    // Getters and setters
     public Long getId_usuario() {
         return id_usuario;
     }

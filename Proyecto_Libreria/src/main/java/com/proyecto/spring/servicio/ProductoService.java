@@ -48,4 +48,8 @@ public class ProductoService {
         };
         return productoRepositorio.findAll(spec);
     }
+
+    public Producto buscarPorId(Long id) {
+        return productoRepositorio.findById(id).orElse(null);
+    }
 }

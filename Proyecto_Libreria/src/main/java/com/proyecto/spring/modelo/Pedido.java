@@ -1,64 +1,70 @@
 package com.proyecto.spring.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Pedido {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	private int id_pedido;
-	private int id_usuario;
-	private LocalDateTime fecha_pedido = LocalDateTime.now();
-	private double total;
-	private Estado estado;
-	
-	@Override
-	public String toString() {
-		return "Pedido [id=" + id + ", id_pedido=" + id_pedido + ", id_usuario=" + id_usuario + ", fecha_pedido=" + fecha_pedido
-				+ ", total=" + total + ", estado=" + estado + "]";
-	}
-	
-	public Long getId() {
+    private LocalDateTime fechaPedido;
+    private double total;
+
+    @ManyToOne
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "pedido")
+    private List<Linea_Pedido> lineasPedido;
+
+    public Pedido() {
+        this.fechaPedido = LocalDateTime.now();
+    }
+
+    public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-	
-	public int getId_pedido() {
-		return id_pedido;
-	}
-	public void setId_pedido(int id_pedido) {
-		this.id_pedido = id_pedido;
-	}
-	public int getId_usuario() {
-		return id_usuario;
-	}
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
-	}
-	public LocalDateTime getFecha_pedido() {
-		return fecha_pedido;
-	}
-	public void setFecha_pedido(LocalDateTime fecha_pedido) {
-		this.fecha_pedido = fecha_pedido;
-	}
-	public double getTotal() {
-		return total;
-	}
-	public void setTotal(double total) {
-		this.total = total;
-	}
-	public Estado getEstado() {
-		return estado;
-	}
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-	
-	
+
+    public LocalDateTime getFechaPedido() {
+        return fechaPedido;
+    }
+
+    public void setFechaPedido(LocalDateTime fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Linea_Pedido> getLineasPedido() {
+        return lineasPedido;
+    }
+
+    public void setLineasPedido(List<Linea_Pedido> lineasPedido) {
+        this.lineasPedido = lineasPedido;
+    }
 }
